@@ -9,7 +9,19 @@ export default class XpathItem extends React.Component<{}, { display: string }> 
     handleClick(e: MouseEvent) {
         e.preventDefault();
         this.setState({ display: "none" })
-        console.log("item clicked")
+        chrome.devtools.panels.elements.createSidebarPane("My Sidebar",
+            function (sidebar) {
+                // sidebar initialization code here
+                sidebar.setPage("sidebar.html");
+                sidebar.setHeight("8ex");
+            });
+
+        chrome.tabs.getSelected((t: chrome.tabs.Tab) => {
+            if (!t.id) { return }
+            chrome.tabs.executeScript(t.id, { code: "'selected'" }, (x) => {
+            })
+        })
+
     }
     render() {
         return <li onClick={this.handleClick} style={{ display: this.state.display }}> this is a xpath item</li >

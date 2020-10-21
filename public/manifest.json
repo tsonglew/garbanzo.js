@@ -10,5 +10,28 @@
     "default_icon": "logo512.png",
     "default_popup": "popup.html"
   },
-  "devtools_page": "index.html"
+  "devtools_page": "devtools.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "static/js/contentScript.chunk.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "static/js/background.chunk.js"
+    ],
+    "persistent": false
+  }
 }
